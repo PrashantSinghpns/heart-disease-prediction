@@ -1,0 +1,16 @@
+# Local environments and generated Python files.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+# Credentials and local editor state.
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+.vscode/
+.DS_Store
+Thumbs.db
+# Keep source data local until attribution and redistribution terms are confirmed.
+data/*.csv

@@ -1,0 +1,56 @@
+{
+  "model": "KNeighborsClassifier",
+  "n_neighbors": 5,
+  "random_state": 42,
+  "test_size": 0.2,
+  "stratified": true,
+  "training_rows": 734,
+  "test_rows": 184,
+  "accuracy": 0.8913043478260869,
+  "f1_score": 0.9029126213592233,
+  "confusion_matrix": [
+    [
+      71,
+      11
+    ],
+    [
+      9,
+      93
+    ]
+  ],
+  "classification_report": {
+    "0": {
+      "precision": 0.8875,
+      "recall": 0.8658536585365854,
+      "f1-score": 0.8765432098765432,
+      "support": 82.0
+    },
+    "1": {
+      "precision": 0.8942307692307693,
+      "recall": 0.9117647058823529,
+      "f1-score": 0.9029126213592233,
+      "support": 102.0
+    },
+    "accuracy": 0.8913043478260869,
+    "macro avg": {
+      "precision": 0.8908653846153847,
+      "recall": 0.8888091822094691,
+      "f1-score": 0.8897279156178832,
+      "support": 184.0
+    },
+    "weighted avg": {
+      "precision": 0.8912311872909698,
+      "recall": 0.8913043478260869,
+      "f1-score": 0.8911610358071593,
+      "support": 184.0
+    }
+  },
+  "dataset_sha256": "948420b084d8a3a0ca42b8419fce9aee175879e43f8aedf712377899a67aa49b",
+  "versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.5.3",
+    "streamlit": "1.58.0"
+  }
+}

@@ -1,0 +1,5 @@
+# Install optional tools for the exploration notebook.
+-r requirements.txt
+matplotlib==3.11.0
+seaborn==0.13.2
+jupyterlab==4.5.9
