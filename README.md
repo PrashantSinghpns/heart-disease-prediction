@@ -1,5 +1,7 @@
 # Heart Disease Prediction
 
+[![App and input checks](https://github.com/PrashantSinghpns/heart-disease-prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/PrashantSinghpns/heart-disease-prediction/actions/workflows/ci.yml)
+
 An interactive machine learning project that predicts the **heart disease class** using a K-nearest neighbors (KNN) classifier and Streamlit.
 
 This project demonstrates data exploration, preprocessing, model comparison, evaluation, and an interactive prediction interface.
@@ -83,3 +85,17 @@ The model predicts a dataset class rather than a personal risk probability. It h
 ## Author
 
 Prashant Singh
+
+
+## Inference contract
+
+`core.prepare_input` rejects missing features, unsupported categories, non-finite numeric values, and non-binary FastingBS. Zero Cholesterol and RestingBP values become missing before applying the saved imputer, matching training. The app continues to use the existing model bundle; this change does not retrain it or establish new accuracy figures.
+
+The figures in `metrics.json` describe the included bundle's recorded 734/184-row split and dataset hash. The source CSV is not supplied, so its scores cannot be independently reproduced from this checkout. The revised training script learns dummy-column vocabulary from training rows and aligns held-out rows to those columns. Imputation and scaling are also fitted on training rows. The included historical artifact bundle is preserved; rerunning training is required to regenerate it under the revised code. Future evaluation should add CV model selection and external validation.
+
+```bash
+python -m pip install -r requirements.txt pytest
+python -m pytest -q
+```
+
+CI checks the actual artifact bundle and Streamlit form on Python 3.14. Only load trusted joblib/pickle artifacts and preserve their training dependency versions.
