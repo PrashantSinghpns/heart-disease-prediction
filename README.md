@@ -1,6 +1,8 @@
-# Heart Disease Prediction
+# Heart Disease Risk Prediction
 
 [![App and input checks](https://github.com/PrashantSinghpns/heart-disease-prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/PrashantSinghpns/heart-disease-prediction/actions/workflows/ci.yml)
+
+[**Try the live Streamlit app →**](https://heart-disease-prediction-edwrnijvqc3zsdlf7otjcp.streamlit.app/)
 
 An interactive machine learning project that predicts the **heart disease class** using a K-nearest neighbors (KNN) classifier and Streamlit.
 
@@ -10,7 +12,11 @@ This project demonstrates data exploration, preprocessing, model comparison, eva
 
 ## Features
 
-- Interactive sliders and category selectors.
+- Clean, wide Streamlit interface with a compact project sidebar.
+- Three input sections: Patient Information, Cardiovascular Measurements, and Clinical Information.
+- Human-readable category labels mapped to the trained model's exact values.
+- Lower/Higher Predicted Risk result cards with the model's positive-class probability.
+- Cached artifact loading and clear loading/prediction error messages.
 - Comparison of Logistic Regression, KNN, Naive Bayes, Decision Tree, and SVM.
 - Consistent category encoding between training and prediction.
 - Missing-value replacement and scaling fitted on training data.
@@ -50,7 +56,7 @@ These results come from one held-out split. Detailed evaluation is available in 
 
 ## Run Locally
 
-Use **Python 3.14** with the pinned dependencies.
+The redesigned app was tested locally with **Python 3.12** and the pinned dependencies in `requirements.txt`.
 
 ```powershell
 git clone https://github.com/PrashantSinghpns/heart-disease-prediction.git  # Download the project
@@ -80,7 +86,7 @@ python -m unittest discover -s tests -v  # Run the project checks
 
 ## Limitations
 
-The model predicts a dataset class rather than a personal risk probability. It has not undergone external clinical validation and can make incorrect predictions.
+The model predicts a dataset class. Its displayed KNN probability is the fraction of neighboring training samples in the heart disease class; it is not a calibrated estimate of personal medical risk. The model has not undergone external clinical validation and can make incorrect predictions.
 
 ## Author
 
@@ -89,7 +95,9 @@ Prashant Singh
 
 ## Inference contract
 
-`core.prepare_input` rejects missing features, unsupported categories, non-finite numeric values, and non-binary FastingBS. Zero Cholesterol and RestingBP values become missing before applying the saved imputer, matching training. The app continues to use the existing model bundle; this change does not retrain it or establish new accuracy figures.
+`app.py` collects 11 inputs using constrained controls and maps the displayed categories to their training values. `core.prepare_input` applies dummy encoding and restores the saved feature-column order. Prediction then applies the saved imputer, scaler, and KNN model. `predict_result` returns the predicted class and the probability for class 1. The redesigned interface reuses the existing artifact bundle without retraining or changing the recorded accuracy figures.
+
+The current core helper does not independently validate arbitrary programmatic inputs or convert zero measurements to missing values. The UI restricts blood pressure and cholesterol to positive values.
 
 The figures in `metrics.json` describe the included bundle's recorded 734/184-row split and dataset hash. The source CSV is not supplied, so its scores cannot be independently reproduced from this checkout. The revised training script learns dummy-column vocabulary from training rows and aligns held-out rows to those columns. Imputation and scaling are also fitted on training rows. The included historical artifact bundle is preserved; rerunning training is required to regenerate it under the revised code. Future evaluation should add CV model selection and external validation.
 
